@@ -61,9 +61,22 @@ Developed a Java application to read and process sensor data, enabling real-time
     title: "Personal Portfolio Website",
     description:
 `Developed a modern and fully responsive personal portfolio website using HTML5, CSS3, and JavaScript to highlight projects, technical skills, and contact information. The website features a clean UI with smooth animations, section-based navigation, and interactive elements for an enhanced user experience. Implemented responsive layouts using media queries to ensure compatibility across mobile, tablet, and desktop devices. Implemented custom CSS effects, hover transitions, and JavaScript-based dynamic components to improve interactivity.`
-    , github: "https://github.com/naveenkumar-fsd/portfolioProject" , live: "#"
+    , github: "https://github.com/naveenkumar-fsd/portfolioProject" , live: "https://github.com/naveenkumar-fsd/naveenkumar.github.io"
   }
 };
+function showProject(num) {
+    document.getElementById("modalTitle").innerText = projectData[num].title;
+    document.getElementById("modalDescription").innerText = projectData[num].description;
+
+    document.getElementById("modalCode").href = projectData[num].code;
+    document.getElementById("modalLive").href = projectData[num].live;
+
+    document.getElementById("projectModal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("projectModal").style.display = "none";
+}
 
 /* MODAL HANDLING */
 const modal = document.getElementById("modal");
