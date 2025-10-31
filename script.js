@@ -1,81 +1,102 @@
-// Typing Animation
-const typedText = document.querySelector(".typing");
-const words = ["Naveen Kumar", "Java Full Stack Developer", "Frontend Developer"];
-let i = 0, j = 0, isDeleting = false, speed = 140;
+/* -----------------------
+   script.js - merged
+   Typing + Scroll Reveal + Project Modal
+   ----------------------- */
 
-function typeEffect() {
-  let current = words[i];
-  if (!isDeleting) {
-    typedText.textContent = current.substring(0, j++);
+/* TYPING ANIMATION */
+const typingEl = document.querySelector(".typing");
+const words = [
+  "Java Full Stack Developer",
+  "Frontend Developer",
+  "Sensor + Java Systems"
+];
+let wIndex = 0, cIndex = 0, deleting = false;
+
+function typeLoop(){
+  if(!typingEl) return; // safety
+  const current = words[wIndex];
+  if(!deleting){
+    typingEl.textContent = current.slice(0, cIndex + 1);
+    cIndex++;
+    if(cIndex === current.length){
+      deleting = true;
+      setTimeout(typeLoop, 900);
+      return;
+    }
   } else {
-    typedText.textContent = current.substring(0, j--);
+    typingEl.textContent = current.slice(0, cIndex - 1);
+    cIndex--;
+    if(cIndex === 0){
+      deleting = false;
+      wIndex = (wIndex + 1) % words.length;
+    }
   }
-
-  if (j === current.length + 1) {
-    isDeleting = true;
-    speed = 100;
-  }
-  if (j === 0) {
-    isDeleting = false;
-    i = (i + 1) % words.length;
-    speed = 140;
-  }
-
-  setTimeout(typeEffect, speed);
+  setTimeout(typeLoop, deleting ? 60 : 90);
 }
-typeEffect();
+typeLoop();
 
-
-// Scroll Reveal Animation
+/* SCROLL REVEAL */
 const sections = document.querySelectorAll(".section");
-window.addEventListener("scroll", () => {
-  sections.forEach(section => {
-    let top = section.getBoundingClientRect().top;
-    if (top < window.innerHeight - 100) {
-      section.classList.add("show");
+function revealOnScroll(){
+  sections.forEach(sec => {
+    const rect = sec.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 100){
+      sec.classList.add("show");
     }
   });
-});
+}
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
 
-
-// Project Modal Data
+/* PROJECT DATA (use your project descriptions) */
 const projectData = {
   1: {
     title: "Development of a Low-Cost Soil Nutrient Analysis System",
-    description: `Designed and implemented a sensor-based system to analyze macro nutrients (N, P, K) in soil using the TCS3200
-color sensor integrated with Arduino. Developed a Java application to read and process sensor data, enabling 
-real-time visualization of soil nutrient levels. The system compares sensor output with standard calibration 
-values to classify nutrient availability as Low, Medium, or High. Aimed at providing a cost-effective and 
-portable solution for farmers to assess soil fertility and support precision agriculture practices.`
+    description:
+`Designed and implemented a sensor-based system to analyze macro nutrients (N, P, K) in soil using the TCS3200 color sensor integrated with Arduino. 
+Developed a Java application to read and process sensor data, enabling real-time visualization of soil nutrient levels. The system compares sensor output with standard calibration values to classify nutrient availability as Low, Medium, or High. Aimed at providing a cost-effective and portable solution for farmers to assess soil fertility and support precision agriculture practices.`
+    , github: "#" , live: "#"
   },
   2: {
     title: "Personal Portfolio Website",
-    description: `Developed a modern and fully responsive personal portfolio website using HTML5, CSS3, and JavaScript to 
-highlight projects, technical skills, and contact information. Features a clean UI with smooth animations,
-responsive layouts, and dynamic JavaScript components for a better user experience.`
+    description:
+`Developed a modern and fully responsive personal portfolio website using HTML5, CSS3, and JavaScript to highlight projects, technical skills, and contact information. The website features a clean UI with smooth animations, section-based navigation, and interactive elements for an enhanced user experience. Implemented responsive layouts using media queries to ensure compatibility across mobile, tablet, and desktop devices. Implemented custom CSS effects, hover transitions, and JavaScript-based dynamic components to improve interactivity.`
+    , github: "#" , live: "#"
   }
 };
 
-
-// Modal Controls
+/* MODAL HANDLING */
 const modal = document.getElementById("modal");
 const modalTitle = document.getElementById("modalTitle");
 const modalDesc = document.getElementById("modalDesc");
-const modalClose = document.querySelector(".close");
+const modalGithub = document.getElementById("modalGithub");
+const modalLive = document.getElementById("modalLive");
+const modalClose = document.querySelector(".modal-close");
 
+// open modal when view buttons clicked
 document.querySelectorAll(".view-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const id = btn.getAttribute("data-id");
-    modalTitle.innerText = projectData[id].title;
-    modalDesc.innerText = projectData[id].description;
+    const data = projectData[id];
+    if(!data) return;
+    modalTitle.textContent = data.title;
+    modalDesc.textContent = data.description;
+    if(modalGithub) modalGithub.href = data.github || "#";
+    if(modalLive) modalLive.href = data.live || "#";
     modal.style.display = "flex";
+    modal.setAttribute("aria-hidden", "false");
   });
 });
 
-modalClose.addEventListener("click", () => {
+// close modal
+if(modalClose) modalClose.addEventListener("click", () => {
   modal.style.display = "none";
+  modal.setAttribute("aria-hidden", "true");
+});
+window.addEventListener("click", (e) => {
+  if(e.target === modal) { modal.style.display = "none"; modal.setAttribute("aria-hidden", "true"); }
 });
 
-window.addEventListener("click", (event) => {
-  if (event.target === modal) modal.style.display = "none";
-});
+/* YEAR in footer */
+const yearEl = document.getElementById("year");
+if(yearEl) yearEl.textContent = new Date().getFullYear();
