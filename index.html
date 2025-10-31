@@ -3,125 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naveen Kumar | Portfolio</title>
-
-    <!-- CSS Link -->
+    <title>NaveenKumar M | Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <!--===== HEADER =====-->
-    <header class="header">
-        <h1><span class="typing"></span></h1>
-        <p class="tagline">Java Full Stack Developer</p>
-        <a href="#contact" class="btn">Hire Me</a>
+    <header>
+        <nav class="navbar">
+            <h1 class="logo">Naveen.</h1>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!--===== ABOUT SECTION =====-->
-    <section id="about" class="section hidden">
-        <h2>About Me</h2>
-        <img src="profile.jpg" alt="My Photo" class="profile-img">
-        <p>
-            Hello! I am Naveen Kumar, a passionate Java Full Stack Developer aspirant.
-            I enjoy building real-time web applications and learning modern technologies like React & Spring Boot.
+    <!--===== HOME =====-->
+    <section id="home" class="section home">
+        <h2>Hi, I'm <span class="highlight">Naveenkumar M</span></h2>
+        <h3><span class="typing"></span></h3>
+        <a href="#projects" class="btn">View My Work</a>
+    </section>
+
+    <!--===== ABOUT =====-->
+    <section id="about" class="section">
+        <h2 class="section-title">About Me</h2>
+        <p class="about-text">
+            Aspiring Java Full-Stack Developer passionate about building modern,
+            high-performing web applications. Currently learning Java, Spring Boot,
+            SQL and advanced frontend technologies like React.
         </p>
     </section>
 
-    <!--===== SKILLS SECTION =====-->
-    <section id="skills" class="section hidden">
-        <h2>Skills</h2>
-
-        <div class="skill">
-            <label>HTML</label>
-            <div class="bar"><div style="width: 90%"></div></div>
+    <!--===== SKILLS =====-->
+    <section id="skills" class="section">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-box">HTML</div>
+            <div class="skill-box">CSS</div>
+            <div class="skill-box">JavaScript</div>
+            <div class="skill-box">React</div>
+            <div class="skill-box">Bootstrap</div>
+            <div class="skill-box">Git & GitHub</div>
+            <div class="skill-box">Java</div>
+            <div class="skill-box">Spring Boot</div>
+            <div class="skill-box">SQL</div>
+            <div class="skill-box">REST API</div>
         </div>
-
-        <div class="skill">
-            <label>CSS</label>
-            <div class="bar"><div style="width: 80%"></div></div>
-        </div>
-
-        <div class="skill">
-            <label>JavaScript</label>
-            <div class="bar"><div style="width: 60%"></div></div>
-        </div>
-
-        <div class="skill">
-            <label>Java</label>
-            <div class="bar"><div style="width: 50%"></div></div>
-        </div>
-      
-       <div class="skill">
-            <label>React</label>
-            <div class="bar"><div style="width: 50%"></div></div>
-        </div>
-
-       <div class="skill">
-            <label>SpringBoot</label>
-            <div class="bar"><div style="width: 50%"></div></div>
-        </div>
-       <div class="skill">
-            <label>Bootstrap</label>
-            <div class="bar"><div style="width: 50%"></div></div>
-        </div>
-
-       <div class="skill">
-            <label>SQL</label>
-            <div class="bar"><div style="width: 50%"></div></div>
-        </div>
-
     </section>
 
-    <!--===== PROJECTS SECTION =====-->
-    <section id="projects" class="section hidden">
+    <!--===== PROJECTS =====-->
+    <section id="projects" class="section">
+        <h2 class="section-title">Projects</h2>
+
+        <div class="project-grid">
+
+           <!-- PROJECTS -->
+    <div class="projects-section">
         <h2>Projects</h2>
 
-        <div class="project">
-            <h3>Portfolio Website</h3>
-            <p>A responsive portfolio built using HTML, CSS, and JavaScript.</p>
-            <a href="#" class="btn">View Project</a>
+        <button class="view-btn" onclick="showProject(1)">View Project 1</button>
+        <button class="view-btn" onclick="showProject(2)">View Project 2</button>
+    </div>
+
+    <!-- Popup Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">✖</span>
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <p id="modalDescription"></p>
         </div>
+    </div>
 
-        <div class="project">
-            <h3>Todo App</h3>
-            <p>Simple To-Do list using JavaScript.</p>
-            <a href="#" class="btn">View Project</a>
-        </div>
-    </section>
-
-    <!--===== CERTIFICATES SECTION =====-->
-    <section id="certificates" class="section hidden">
-        <h2>Certificates</h2>
-        <p>Here are some of my learning achievements.</p>
-
-        <div class="cert-list">
-            <img src="cert1.jpg" alt="Certificate 1" class="cert-img">
-            <img src="cert2.jpg" alt="Certificate 2" class="cert-img">
-            <img src="cert3.jpg" alt="Certificate 3" class="cert-img">
         </div>
     </section>
 
-    <!--===== CONTACT SECTION =====-->
-    <section id="contact" class="section hidden">
-        <h2>Contact Me</h2>
-        <p>Email: <a href="mailto:naveen@gmail.com">naveenkumar977912345@gmail.com</a></p>
-
-        <div class="social">
-            <a href="www.linkedin.com/in/naveenkumar-fsd" target="_blank">LinkedIn</a>
-            <a href="https://github.com/naveenkumar-fsd" target="_blank">GitHub</a>
+    <!--===== MODAL POPUP =====-->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDesc"></p>
+            <a id="modalGithub" href="#" target="_blank" class="btn">GitHub</a>
         </div>
+    </div>
 
-        <br>
-        <a href="NAVEENKUMAR_M_Resume.pdf" class="btn" download>Download CV</a>
+    <!--===== CONTACT =====-->
+    <section id="contact" class="section">
+        <h2 class="section-title">Contact</h2>
+        <p>Email: <a href="mailto:naveen@example.com">naveenkumar977912345@gmail.com</a></p>
+        <p>LinkedIn: <a href="www.linkedin.com/in/naveenkumar-fsd" target="_blank">Click</a></p>
+        <p>GitHub: <a href="https://github.com/naveenkumar-fsd" target="_blank">Click</a></p>
     </section>
 
-    <!-- FOOTER -->
     <footer>
-        <p>© 2025 Naveen Kumar. All rights reserved.</p>
+        <p>© 2025 Naveenkumar M | All Rights Reserved</p>
     </footer>
 
-
-    <!-- JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
