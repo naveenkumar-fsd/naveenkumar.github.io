@@ -1,115 +1,56 @@
-/* -----------------------
-   script.js - merged
-   Typing + Scroll Reveal + Project Modal
-   ----------------------- */
+// Typing Animation
+const typedText = document.querySelector(".typing");
+const words = ["Naveen Kumar", "Java Full Stack Developer", "Frontend Developer"];
+let i = 0, j = 0, isDeleting = false;
 
-/* TYPING ANIMATION */
-const typingEl = document.querySelector(".typing");
-const words = [
-  "Java Full Stack Developer",
-  "Frontend Developer",
-  "Sensor + Java Systems"
-];
-let wIndex = 0, cIndex = 0, deleting = false;
+function typeEffect() {
+    let text = words[i];
+    typedText.textContent = text.substring(0, j);
 
-function typeLoop(){
-  if(!typingEl) return; // safety
-  const current = words[wIndex];
-  if(!deleting){
-    typingEl.textContent = current.slice(0, cIndex + 1);
-    cIndex++;
-    if(cIndex === current.length){
-      deleting = true;
-      setTimeout(typeLoop, 900);
-      return;
-    }
-  } else {
-    typingEl.textContent = current.slice(0, cIndex - 1);
-    cIndex--;
-    if(cIndex === 0){
-      deleting = false;
-      wIndex = (wIndex + 1) % words.length;
-    }
-  }
-  setTimeout(typeLoop, deleting ? 60 : 90);
+    if(!isDeleting) j++;
+    else j--;
+
+    if(j === text.length + 1) isDeleting = true;
+    if(j === 0) { isDeleting = false; i = (i + 1) % words.length; }
+
+    setTimeout(typeEffect, isDeleting ? 80 : 140);
 }
-typeLoop();
+typeEffect();
 
-/* SCROLL REVEAL */
+// Scroll Animation
 const sections = document.querySelectorAll(".section");
-function revealOnScroll(){
-  sections.forEach(sec => {
-    const rect = sec.getBoundingClientRect();
-    if(rect.top < window.innerHeight - 100){
-      sec.classList.add("show");
-    }
-  });
-}
-window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
+window.addEventListener("scroll", () => {
+    sections.forEach(sec => sec.getBoundingClientRect().top < window.innerHeight - 100 && sec.classList.add("show"));
+});
 
-/* PROJECT DATA (use your project descriptions) */
+// Modal Project Info
 const projectData = {
-  1: {
-    title: "Development of a Low-Cost Soil Nutrient Analysis System",
-    description:
-`Designed and implemented a sensor-based system to analyze macro nutrients (N, P, K) in soil using the TCS3200 color sensor integrated with Arduino. 
-Developed a Java application to read and process sensor data, enabling real-time visualization of soil nutrient levels. The system compares sensor output with standard calibration values to classify nutrient availability as Low, Medium, or High. Aimed at providing a cost-effective and portable solution for farmers to assess soil fertility and support precision agriculture practices.`
-    , github: "#" , live: "#"
-  },
-  2: {
-    title: "Personal Portfolio Website",
-    description:
-`Developed a modern and fully responsive personal portfolio website using HTML5, CSS3, and JavaScript to highlight projects, technical skills, and contact information. The website features a clean UI with smooth animations, section-based navigation, and interactive elements for an enhanced user experience. Implemented responsive layouts using media queries to ensure compatibility across mobile, tablet, and desktop devices. Implemented custom CSS effects, hover transitions, and JavaScript-based dynamic components to improve interactivity.`
-    , github: "https://github.com/naveenkumar-fsd/portfolioProject" , live: "https://github.com/naveenkumar-fsd/naveenkumar.github.io"
-  }
+    1: {
+        title: "Low-Cost Soil Nutrient Analysis System",
+        description: `Sensor + Java application for real-time soil analysis.`,
+        code: "#",
+        live: "#"
+    },
+    2: {
+        title: "Personal Portfolio Website",
+        description: `Modern responsive website with animations.`,
+        code: "https://github.com/naveenkumar-fsd/portfolioProject",
+        live: "https://naveenkumar-fsd.github.io/naveenkumar.github.io/"
+    }
 };
-function showProject(num) {
-    document.getElementById("modalTitle").innerText = projectData[num].title;
-    document.getElementById("modalDescription").innerText = projectData[num].description;
 
-    document.getElementById("modalCode").href = projectData[num].code;
-    document.getElementById("modalLive").href = projectData[num].live;
+const modal = document.getElementById("projectModal");
+const closeBtn = document.querySelector(".close");
 
-    document.getElementById("projectModal").style.display = "flex";
-}
-
-function closeModal() {
-    document.getElementById("projectModal").style.display = "none";
-}
-
-/* MODAL HANDLING */
-const modal = document.getElementById("modal");
-const modalTitle = document.getElementById("modalTitle");
-const modalDesc = document.getElementById("modalDesc");
-const modalGithub = document.getElementById("modalGithub");
-const modalLive = document.getElementById("modalLive");
-const modalClose = document.querySelector(".modal-close");
-
-// open modal when view buttons clicked
 document.querySelectorAll(".view-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const id = btn.getAttribute("data-id");
-    const data = projectData[id];
-    if(!data) return;
-    modalTitle.textContent = data.title;
-    modalDesc.textContent = data.description;
-    if(modalGithub) modalGithub.href = data.github || "#";
-    if(modalLive) modalLive.href = data.live || "#";
-    modal.style.display = "flex";
-    modal.setAttribute("aria-hidden", "false");
-  });
+    btn.addEventListener("click", function(){
+        let id = this.getAttribute("data-id");
+        document.getElementById("modalTitle").innerText = projectData[id].title;
+        document.getElementById("modalDescription").innerText = projectData[id].description;
+        document.getElementById("modalCode").href = projectData[id].code;
+        document.getElementById("modalLive").href = projectData[id].live;
+        modal.style.display = "flex";
+    });
 });
 
-// close modal
-if(modalClose) modalClose.addEventListener("click", () => {
-  modal.style.display = "none";
-  modal.setAttribute("aria-hidden", "true");
-});
-window.addEventListener("click", (e) => {
-  if(e.target === modal) { modal.style.display = "none"; modal.setAttribute("aria-hidden", "true"); }
-});
-
-/* YEAR in footer */
-const yearEl = document.getElementById("year");
-if(yearEl) yearEl.textContent = new Date().getFullYear();
+closeBtn.addEventListener("click", () => modal.style.display = "none");
