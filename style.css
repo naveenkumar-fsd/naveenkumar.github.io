@@ -1,0 +1,187 @@
+/* ---------- GLOBAL STYLES ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #0a0f1f;
+  color: #fff;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+/* ---------- SECTIONS ---------- */
+.section {
+  width: 80%;
+  margin: auto;
+  padding: 60px 0;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s ease-in-out;
+}
+
+.section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+h2 {
+  font-size: 2.3rem;
+  margin-bottom: 1rem;
+  color: #00eaff;
+}
+
+p {
+  font-size: 1.1rem;
+}
+
+/* ---------- HEADER ---------- */
+.header {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #00111f, #001f3f);
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  color: #00eaff;
+}
+
+.tagline {
+  margin: 10px 0 20px;
+  font-size: 1.3rem;
+}
+
+/* ---------- BUTTON STYLE ---------- */
+.btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 22px;
+  background: #00eaff;
+  color: #00111f;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #00bcd4;
+  transform: scale(1.05);
+}
+
+/* ---------- PROFILE IMAGE ---------- */
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: 3px solid #00eaff;
+  object-fit: cover;
+}
+
+/* ---------- SKILLS BAR ---------- */
+.skill {
+  width: 70%;
+  margin: 18px auto;
+  text-align: left;
+}
+
+.skill label {
+  font-size: 1.1rem;
+}
+
+.bar {
+  width: 100%;
+  background: #1e2b43;
+  height: 10px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.bar div {
+  height: 10px;
+  background: #00eaff;
+  border-radius: 5px;
+}
+
+/* ---------- PROJECTS ---------- */
+.project {
+  background: #0d1b2a;
+  padding: 20px;
+  margin: 20px auto;
+  width: 85%;
+  border-radius: 10px;
+  border: 2px solid #023e8a;
+  transition: 0.3s ease;
+}
+
+.project:hover {
+  transform: translateY(-7px);
+  box-shadow: 0px 0px 15px #00eaff;
+}
+
+/* ---------- CERTIFICATES ---------- */
+.cert-list {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.cert-img {
+  width: 200px;
+  border-radius: 10px;
+  border: 2px solid #00eaff;
+  transition: 0.3s ease;
+}
+
+.cert-img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 15px #00eaff;
+}
+
+/* ---------- SOCIAL LINKS ---------- */
+.social a {
+  color: #00eaff;
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px;
+  font-size: 1.1rem;
+}
+
+.social a:hover {
+  text-shadow: 0 0 12px #00eaff;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background: #000814;
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9rem;
+  margin-top: 40px;
+  color: #aaa;
+}
+
+/* ---------- MOBILE RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .skill {
+    width: 90%;
+  }
+  .project {
+    width: 95%;
+  }
+  .cert-img {
+    width: 150px;
+  }
+}
