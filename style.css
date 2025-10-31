@@ -177,7 +177,7 @@ body{
 }
 .modal-close{position:absolute;right:18px;top:14px;background:transparent;border:0;color:#fff;font-size:20px;cursor:pointer}
 .modal-desc{white-space:pre-wrap;margin-top:12px;line-height:1.6;color:rgba(255,255,255,0.92)}
-.modal-links{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+.modal-actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
 
 /* ============ CONTACT ============ */
 .contact-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
